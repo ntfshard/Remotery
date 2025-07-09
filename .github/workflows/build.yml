@@ -38,7 +38,6 @@ jobs:
       - name: Run
         run: .github/scripts/run_tests.sh
 
-
   build-windows:
     runs-on: 'windows-latest'
 
@@ -46,15 +45,12 @@ jobs:
       matrix:
         platform: ['windows']
         arch: ['x86', 'x64']
-        buildmode: ['debug', 'release']
-        toolset: ['14.3','14.2','14.1']
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: ${{ matrix.arch }}
-          toolset: ${{ matrix.toolset }}
       - name: Build
         run: .github/scripts/compile.bat ${{ matrix.platform }} ${{ matrix.arch }} ${{ matrix.buildmode }}
       - name: Run
